@@ -11,4 +11,4 @@
 </packages>
 ```
 
-- รัน `sh build.sh`
+- รัน `sh build.sh` เพื่อโหลด `nuget.exe` และ `cake.exe`
