@@ -17,7 +17,7 @@ Task("RunUnitTest")
 });
 
 Task("RestoreNugetPackages")
-    .IsDependentOn("Clean")
+    //.IsDependentOn("Clean")
     .Does(() => {
         NuGetRestore("./src/Example/Example.fsproj");
 });
