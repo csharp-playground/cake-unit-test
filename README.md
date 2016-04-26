@@ -25,7 +25,7 @@ Task("RunUnitTest")
 });
 ```
 
-- เขียน Task ไว้ในไฟล์ `src\Example\Example.fs`
+- เขียน Unit Test ไว้ในไฟล์ `src\Example\Example.fs`
 
 ```fsharp
 [<Test>]
