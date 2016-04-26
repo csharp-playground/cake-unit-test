@@ -1,4 +1,4 @@
-#### รันเทสด้วย Cake
+#### Execute Unit Test With Cake
 
 - โหลดไฟล์ `build.sh` จาก https://github.com/cake-build/example
 - สร้างไฟล์ `packages.config` ไว้ในโฟลเดอร์ `tools`
@@ -15,7 +15,7 @@
 
 - แก้ไขไฟล์ `build.cake` โดยเพิ่ม Target `RunUnitTest` ดังนี้
 
-```
+```csharp
 Task("RunUnitTest")
     .IsDependentOn("Build")
     .Does(() => {
@@ -27,15 +27,15 @@ Task("RunUnitTest")
 
 - เขียน Task ไว้ในไฟล์ `src\Example\Example.fs`
 
-```
+```fsharp
 [<Test>]
 let shouldCheckEquality() =
     1 + 1 |> should equal 2
 ```
 
-- รัน `sh build.sh` อีกครั้ง จะได้ผลลัพท์ด้งนี้
+- รัน `sh build.sh` อีกครั้งรัน Test ที่เขียนไว้
 
-```bash
+```java
 ...
 Test Run Summary
     Overall result: Passed
