@@ -8,6 +8,32 @@ Task("Clean").Does(() => {
         CleanDirectory(buildDir);
 });
 
-Task("Default").IsDependentOn("Clean");
+Task("RunUnitTest")
+    .IsDependentOn("Build")
+    .Does(() => {
+        NUnit3("./src/Example/bin/" + configuration + "/Example.dll", new NUnit3Settings {
+            NoResults = true
+        });
+});
+
+Task("RestoreNugetPackages")
+    .IsDependentOn("Clean")
+    .Does(() => {
+        NuGetRestore("./src/Example/Example.fsproj");
+});
+
+Task("Build")
+    .IsDependentOn("RestoreNugetPackages")
+    .Does(() => {
+        if(IsRunningOnWindows()) {
+
+        }else {
+            XBuild("./src/Example/Example.fsproj", settings => {
+                    settings.SetConfiguration(configuration);
+            });
+        }
+});
+
+Task("Default").IsDependentOn("RunUnitTest");
 
 RunTarget(target);

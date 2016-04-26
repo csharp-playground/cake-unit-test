@@ -12,3 +12,54 @@
 ```
 
 - รัน `sh build.sh` เพื่อโหลด `nuget.exe` และ `cake.exe`
+
+- แก้ไขไฟล์ `build.cake` โดยเพิ่ม Target `RunUnitTest` ดังนี้
+
+```
+Task("RunUnitTest")
+    .IsDependentOn("Build")
+    .Does(() => {
+        NUnit3("./src/Example/bin/" + configuration + "/Example.dll", new NUnit3Settings {
+            NoResults = true
+        });
+});
+```
+
+- เขียน Task ไว้ในไฟล์ `src\Example\Example.fs`
+
+```
+[<Test>]
+let shouldCheckEquality() =
+    1 + 1 |> should equal 2
+```
+
+- รัน `sh build.sh` อีกครั้ง จะได้ผลลัพท์ด้งนี้
+
+```bash
+...
+Test Run Summary
+    Overall result: Passed
+   Tests run: 1, Passed: 1, Errors: 0, Failures: 0, Inconclusive: 0
+     Not run: 0, Invalid: 0, Ignored: 0, Explicit: 0, Skipped: 0
+  Start time: 2016-04-26 17:55:30Z
+    End time: 2016-04-26 17:55:30Z
+    Duration: 0.125 seconds
+
+Finished executing task: RunUnitTest
+
+========================================
+Default
+========================================
+Executing task: Default
+Finished executing task: Default
+
+Task                          Duration
+--------------------------------------------------
+Clean                         00:00:00.0061904
+RestoreNugetPackages          00:00:00.4879480
+Build                         00:00:04.1431304
+RunUnitTest                   00:00:01.5413487
+Default                       00:00:00.0003019
+--------------------------------------------------
+Total:                        00:00:06.1789194
+```
