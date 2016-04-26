@@ -11,7 +11,7 @@
 </packages>
 ```
 
-- รัน `sh build.sh` เพื่อโหลด `nuget.exe` และ `cake.exe`
+- รัน `./build.sh` เพื่อโหลด `nuget.exe` และ `cake.exe`
 
 - แก้ไขไฟล์ `build.cake` โดยเพิ่ม Target `RunUnitTest` ดังนี้
 
@@ -33,7 +33,7 @@ let shouldCheckEquality() =
     1 + 1 |> should equal 2
 ```
 
-- รัน `sh build.sh` อีกครั้งรัน Test ที่เขียนไว้
+- รัน Unit Test โดยใช้คำสั่ง `./build.sh`
 
 ```java
 ...
